@@ -1,6 +1,6 @@
 module Backstage
 
-  def backstage_update(item)
+  def self.update(item)
     item.sell_in -= 1
     return item.quality = 0 if item.sell_in <= 0
     return if item.quality == 50
