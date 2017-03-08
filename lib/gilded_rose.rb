@@ -8,13 +8,13 @@ class GildedRose
   def update_quality
     @items.each do |item|
       name = item.name.downcase
-      update_backstage(item) if name.match(/backstage/)
-      update_brie(item) if name.match(/brie/)
-      update_normal(item) unless name.match(@unique_items.each)
+      match = @unique_items.select{ |uniq| name.match(uniq) }.join
+      next if match == "sulfuras"
+      match != "" ? send(match, item) : normal(item)
     end
   end
 
-  def update_backstage(item)
+  def backstage(item)
     item.sell_in -= 1
     return item.quality = 0 if item.sell_in <= 0
     return if item.quality == 50
@@ -22,13 +22,13 @@ class GildedRose
     item.quality += 1 if item.sell_in <= 5
   end
 
-  def update_brie(item)
+  def brie(item)
     item.sell_in -= 1
     return if item.quality == 50
     item.sell_in <= 0 ? item.quality += 2 : item.quality += 1
   end
 
-  def update_normal(item)
+  def normal(item)
     item.sell_in -= 1
     item.sell_in <= 0 ? item.quality -= 2 : item.quality -= 1
   end
