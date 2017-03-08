@@ -2,6 +2,7 @@ class GildedRose
 
   def initialize(items)
     @items = items
+    @unique_items = %w(backstage sulfuras brie)
   end
 
   def update_quality
@@ -9,7 +10,7 @@ class GildedRose
       name = item.name.downcase
       update_backstage(item) if name.match(/backstage/)
       update_brie(item) if name.match(/brie/)
-      update_normal(item) unless name.match(/(backstage|sulfuras|brie)/)
+      update_normal(item) unless name.match(@unique_items.each)
     end
   end
 
