@@ -8,7 +8,7 @@ class GildedRose
   def update_quality
     @items.each do |item|
       name = item.name.downcase
-      match = @unique_items.select{ |uniq| name.match(uniq.to_s) }.join.to_sym
+      match = @unique_items.select{ |x| name.match(x.to_s) }.join.to_sym
       next if match == :sulfuras
       match.empty? ? normal(item) : send(match, item)
     end
