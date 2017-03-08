@@ -4,7 +4,7 @@ require 'gilded_rose'
 
 describe GildedRose do
   let(:normal_item) {Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20)}
-  let(:brie) {Item.new(name="Aged Brie", sell_in=2, quality=0)}
+  let(:brie) {Item.new(name="Aged Brie", sell_in=2, quality=10)}
   let(:sulfuras) {Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=40)}
   let(:backstage) {Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20)}
   let(:items) { [normal_item, brie, sulfuras, backstage] }
