@@ -1,29 +1,23 @@
 class GildedRose
 
-  MIN_QUALITY = 0
-  MAX_QUALITY = 50
-
   def initialize(items)
     @items = items
-    @qual_adjust = { "backstage pass": { 0 => -MAX_QUALITY, 5 => 3, 10 => 2, MAX_QUALITY => 1 },
-                    "aged brie": { MAX_QUALITY => 1 },
-                    "sulfuras": { MAX_QUALITY => 0 },
-                    "normal": { MAX_QUALITY => -1 }
-                   }
   end
 
-  def update_quality()
-    update = -> (item) do
-      match = @qual_adjust.select { |k,v| item.name.downcase.include?(k.to_s) }.keys
-      match = match.empty? ? :normal : match.first.to_sym
-      return if item.quality == MIN_QUALITY || item.quality == MAX_QUALITY || match == :sulfuras
-      _, adjustment = @qual_adjust[match].find { |key ,_| item.sell_in <= key }
-      adjustment *= 2 if item.sell_in <= 0
-      item.quality += adjustment
-      item.quality = MIN_QUALITY if item.quality <= MIN_QUALITY
-      item.sell_in -= 1
+  def update_quality
+    @items.each do |item|
+      name = item.name.downcase
+      update_backstage(item) if name.match(/backstage/)
     end
-    @items.each(&update)
+  end
+
+  def update_backstage(item)
+    item.sell_in -= 1
+    return item.quality = 0 if item.sell_in <= 0
+    return if item.quality == 50
+    item.quality += 1
+    item.quality += 1 if item.sell_in <= 10
+    item.quality += 1 if item.sell_in <= 5
   end
 
 end
