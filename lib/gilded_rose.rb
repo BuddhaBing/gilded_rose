@@ -8,6 +8,7 @@ class GildedRose
     @items.each do |item|
       name = item.name.downcase
       update_backstage(item) if name.match(/backstage/)
+      update_brie(item) if name.match(/brie/)
     end
   end
 
@@ -18,6 +19,13 @@ class GildedRose
     item.quality += 1
     item.quality += 1 if item.sell_in <= 10
     item.quality += 1 if item.sell_in <= 5
+  end
+
+  def update_brie(item)
+    item.sell_in -= 1
+    return if item.quality == 50
+    item.quality += 1
+    item.quality += 1 if item.sell_in <= 0
   end
 
 end
