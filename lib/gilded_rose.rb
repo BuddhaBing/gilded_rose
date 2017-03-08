@@ -6,24 +6,23 @@ class GildedRose
 
   def initialize(items)
     @items = items
+    @qual_adjust = { "backstage pass": { 0 => -MAX_QUALITY, 5 => 3, 10 => 2, MAX_QUALITY => 1 },
+                    "aged brie": { MAX_QUALITY => 1 },
+                    "sulfuras": { MAX_QUALITY => 0 },
+                    "normal": { MAX_QUALITY => NORMAL_DEGREDATION }
+                   }
   end
 
   def update_quality()
     update = -> (item) do
-      qual_adjust = { "backstage pass": { 0 => -item.quality, 5 => 3, 10 => 2, MAX_QUALITY => 1 },
-                      "aged brie": { MAX_QUALITY => 1 },
-                      "sulfurus": { MAX_QUALITY => 0 },
-                      "normal": { MAX_QUALITY => NORMAL_DEGREDATION }
-                    }
-      match = qual_adjust.select { |key,val| item.name.downcase.include?(key.to_s) }.keys
+      match = @qual_adjust.select { |k,v| item.name.downcase.include?(k.to_s) }.keys
       match = match.empty? ? :normal : match.first.to_sym
-      _, adjustment = qual_adjust[match].find { |key ,_| item.sell_in <= key }
-      adjustment = NORMAL_DEGREDATION if !adjustment
+      _, adjustment = @qual_adjust[match].find { |key ,_| item.sell_in <= key }
       adjustment *= 2 if out_of_date?(item)
-      item.quality += adjustment unless item.name.match(/[Ss]ulfuras/)
+      item.quality += adjustment unless match == :sulfuras
       item.quality = MIN_QUALITY if item.quality <= MIN_QUALITY
       item.quality = MAX_QUALITY if item.quality >= MAX_QUALITY
-      item.sell_in -= 1 unless item.name.match(/[Ss]ulfuras/)
+      item.sell_in -= 1 unless match == :sulfuras
     end
     @items.each(&update)
   end
