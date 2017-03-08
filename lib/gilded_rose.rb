@@ -9,6 +9,7 @@ class GildedRose
       name = item.name.downcase
       update_backstage(item) if name.match(/backstage/)
       update_brie(item) if name.match(/brie/)
+      update_normal(item) unless name.match(/(backstage|sulfuras|brie)/)
     end
   end
 
@@ -26,6 +27,12 @@ class GildedRose
     return if item.quality == 50
     item.quality += 1
     item.quality += 1 if item.sell_in <= 0
+  end
+
+  def update_normal(item)
+    item.sell_in -= 1
+    item.quality -= 1
+    item.quality -= 1 if item.sell_in <= 0
   end
 
 end
