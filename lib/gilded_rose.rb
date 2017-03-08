@@ -2,15 +2,15 @@ class GildedRose
 
   def initialize(items)
     @items = items
-    @unique_items = %w(backstage sulfuras brie)
+    @unique_items = %i{backstage sulfuras brie}
   end
 
   def update_quality
     @items.each do |item|
       name = item.name.downcase
-      match = @unique_items.select{ |uniq| name.match(uniq) }.join
-      next if match == "sulfuras"
-      match != "" ? send(match, item) : normal(item)
+      match = @unique_items.select{ |uniq| name.match(uniq.to_s) }.join.to_sym
+      next if match == :sulfuras
+      match.empty? ? normal(item) : send(match, item)
     end
   end
 
