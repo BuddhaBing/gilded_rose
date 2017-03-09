@@ -6,7 +6,8 @@ describe GildedRose do
   let(:brie) {Item.new(name="Aged Brie", sell_in=2, quality=10)}
   let(:sulfuras) {Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=40)}
   let(:backstage) {Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20)}
-  let(:items) { [normal_item, brie, sulfuras, backstage] }
+  let(:conjured) {Item.new(name="Conjured Mana Hat", sell_in=15, quality=20)}
+  let(:items) { [normal_item, brie, sulfuras, backstage, conjured] }
   subject { described_class.new(items) }
   it 'initializes with one argument (items)' do
     expect(described_class).to respond_to(:new).with(1).argument
@@ -45,6 +46,11 @@ describe GildedRose do
           expect{subject.update_quality}.not_to change{sulfuras.sell_in}
         end
       end
+      context 'conjured' do
+        it 'decreases the quality of a conjured item by 2' do
+          expect{subject.update_quality}.to change{conjured.quality}.by(-2)
+        end
+      end
     end
 
     context 'sell in value < 0' do
@@ -75,6 +81,12 @@ describe GildedRose do
         end
         it 'does not affect the sell in value of sulfuras' do
           expect{subject.update_quality}.not_to change{sulfuras.sell_in}
+        end
+      end
+      context 'conjured' do
+        it 'decreases the quality of a conjured item by 4' do
+          allow(conjured).to receive(:sell_in).and_return(-1)
+          expect{subject.update_quality}.to change{conjured.quality}.by(-4)
         end
       end
     end
