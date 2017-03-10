@@ -1,4 +1,3 @@
-require 'gilded_rose_legacy'
 require 'gilded_rose'
 
 describe GildedRose do
