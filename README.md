@@ -73,7 +73,7 @@ $ items = [
 			Item.new(name="Aged Brie", sell_in=2, quality=10),
 			Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=40),
 			Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20),
-			Item.new(name="Conjured Mana Hat", sell_in=15, quality=20),
+			Item.new(name="Conjured Mana Hat", sell_in=15, quality=20)
 		  ]
 $ rose = GildedRose.new(items)
 $ rose.update_quality
