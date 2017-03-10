@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/treborb/gilded_rose/branch/master/graph/badge.svg)](https://codecov.io/gh/treborb/gilded_rose)
 
 #### Ruby v2.3.3
-### [Makers Academy] (http://www.makersacademy.com) - Week ...
+### [Makers Academy] (http://www.makersacademy.com) - Week 10 Solo Practice Tech Test
 
 ## Index
 * [Installation] (#Install)
