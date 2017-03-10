@@ -1,3 +1,4 @@
+require_relative 'item'
 require_relative 'normal'
 require_relative 'brie'
 require_relative 'backstage'
