@@ -3,13 +3,16 @@
 [![Build Status](https://travis-ci.org/treborb/gilded_rose.svg?branch=master)](https://travis-ci.org/treborb/gilded_rose)
 [![codecov](https://codecov.io/gh/treborb/gilded_rose/branch/master/graph/badge.svg)](https://codecov.io/gh/treborb/gilded_rose)
 
-#### Ruby v2.3.3
 ### [Makers Academy] (http://www.makersacademy.com) - Week 10 Solo Practice Tech Test
 
-## Index
-* [Installation] (#Install)
-* [Tests] (#Tests)
-* [Usage] (#Usage)
+## Technologies
+* [Ruby v2.3.3](https://www.ruby-lang.org/en/)
+* [Rspec](http://rspec.info/)
+
+## Jump To
+* [Installation](#install)
+* [Usage](#usage)
+* [Tests](#tests)
 
 ## The brief
 
@@ -48,7 +51,7 @@ for you).
 Just for clarification, an item can never have its quality increase above 50, however "Sulfuras" is a
 legendary item and as such its quality is 80 and it never alters.
 
-## <a id="Install">Installation</a>
+## <a name="install">Installation</a>
 
 ```
 $ git clone https://github.com/treborb/gilded_rose.git
@@ -57,7 +60,8 @@ $ rvm 2.3.3
 $ gem install bundler
 $ bundle
 ```
-## <a id="Usage">Usage</a>
+
+## <a name="usage">Usage</a>
 
 #### Load up your favourite REPL (e.g. irb)
 
@@ -79,7 +83,8 @@ $ rose = GildedRose.new(items)
 $ rose.update_quality
 ```
 
-## <a id=“Tests">Running the tests</a>
+## <a name="tests">Running the tests</a>
+
 ```ruby
 $ rspec
 ```
